@@ -1,6 +1,10 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     d.setPosition(20, 100)
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (sprite, otherSprite) {
+    sprites.destroy(sprite, effects.disintegrate, 100)
+    info.changeScoreBy(1)
+})
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     f.setPosition(160, 100)
 })
@@ -130,7 +134,7 @@ scene.setBackgroundImage(img`
     ................................................................................................................................................................
     ................................................................................................................................................................
     ................................................................................................................................................................
-    ................................................................................................................................................................
+    ddddddddddddddddd........dddddddddddd........dddddddddddd........dddddddddddd........ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
     ................................................................................................................................................................
     ................................................................................................................................................................
     ................................................................................................................................................................
@@ -236,7 +240,8 @@ MakeyMakey.MakeyMakeyKey.G,
 MakeyMakey.MakeyMakeyKey.UP,
 MakeyMakey.MakeyMakeyKey.UP
 )
-game.onUpdateInterval(200, function () {
+info.setScore(0)
+game.onUpdateInterval(500, function () {
     lane = randint(1, 4)
     laneobject = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -256,6 +261,6 @@ game.onUpdateInterval(200, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Projectile)
-    laneobject.setPosition(0, 0)
-    laneobject.setVelocity(0, 68)
+    laneobject.setPosition(lane * 20, 0)
+    laneobject.setVelocity(0, 120)
 })
